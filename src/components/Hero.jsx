@@ -96,13 +96,13 @@ export default function Hero() {
             transition={{ duration: 0.7, delay: 0.15 }}
             className="relative"
           >
-            <div className="relative rounded-4xl overflow-hidden shadow-soft bg-navy-700 aspect-[4/5] max-w-md mx-auto">
-              <img
-                src="https://images.unsplash.com/photo-1666887360669-3aa2b1c93f57?q=80&w=900&auto=format&fit=crop"
-                alt="Audiologist consulting with a patient about hearing aid options"
-                className="absolute inset-0 w-full h-full object-cover mix-blend-normal opacity-95"
-                loading="eager"
-              />
+             <div className="relative rounded-4xl overflow-hidden shadow-soft bg-navy-700 aspect-[4/5] max-w-md mx-auto">
+  <img
+    src="/audiologist.jpg"
+    alt="Audiologist consulting with a patient about hearing aid options"
+    className="absolute inset-0 w-full h-full object-cover"
+    loading="eager"
+  />
               <div className="absolute inset-0 bg-gradient-to-t from-navy-900/70 via-navy-900/5 to-transparent" />
               <div className="absolute bottom-5 left-5 right-5 rounded-2xl bg-white/95 backdrop-blur px-4 py-3.5 shadow-card">
                 <p className="text-xs font-bold text-teal-600 uppercase tracking-wide">Personalised care</p>

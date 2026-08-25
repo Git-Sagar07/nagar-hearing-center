@@ -3,10 +3,10 @@ export const clinic = {
   phone: '9403885143',
   phoneDisplay: '+91 94038 85143',
   email: 'nagarhearing@gmail.com',
-  address: 'Hanuman Nagar, Savedi, Ahilyanagar, Maharashtra 414003',
+  address: 'Nagar Hearing and Speech Centre ,Near Morya Mangal Karyalaya, Savedi, Ahilyanagar, Maharashtra 414003',
   landmark: 'Located inside Kulkarni ENT & Maternity Hospital',
   hours: 'Open today · Closes 8:00 PM',
-  mapsQuery: 'Nagar+Hearing+And+Speech+Centre+Hanuman+Nagar+Savedi+Ahilyanagar',
+  mapsQuery: 'Nagar+Hearing+And+Speech+Centre+Near+Morya|Mangal|Karyalaya+Savedi+Ahilyanagar',
 }
 
 export const telHref = `tel:+91${clinic.phone}`
