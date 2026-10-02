@@ -9,14 +9,17 @@
  * AdminDashboard.jsx never needs to know which mode it's in.
  *
  * ---- Wiring up the real backend later ----
- * Expected endpoints (to be added to the Express backend):
- *   POST   /api/admin/login              { password }  -> { token }
- *   GET    /api/admin/appointments       (Bearer token) -> { data: Appointment[] }
- *   GET    /api/admin/contacts           (Bearer token) -> { data: Contact[] }
- *   PATCH  /api/admin/appointments/:id   (Bearer token) { status } -> { data }
- *   PATCH  /api/admin/contacts/:id       (Bearer token) { status } -> { data }
- *   DELETE /api/admin/appointments       (Bearer token) { ids: string[] } -> { success }
- *   DELETE /api/admin/contacts           (Bearer token) { ids: string[] } -> { success }
+ * Expected endpoints (already built in the Express backend):
+ *   POST  /api/admin/login              { password }  -> { data: { token } }
+ *   GET   /api/admin/appointments       (Bearer token) -> { data: Appointment[] }
+ *   GET   /api/admin/contacts           (Bearer token) -> { data: Contact[] }
+ *   PATCH /api/admin/appointments/:id   (Bearer token) { status } -> { data }
+ *   PATCH /api/admin/contacts/:id       (Bearer token) { status } -> { data }
+ *   DELETE /api/admin/appointments      (Bearer token) { ids: string[] } -> { success }
+ *   DELETE /api/admin/contacts          (Bearer token) { ids: string[] } -> { success }
+ *
+ * Every backend response is wrapped as { success, message, data } — so the
+ * actual payload always lives one level deeper, under `.data`.
  */
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || ''
@@ -61,9 +64,13 @@ export async function login(password) {
     body: JSON.stringify({ password }),
   })
   if (!res.ok) throw new Error('Incorrect password')
-  const data = await res.json()
-  sessionStorage.setItem(TOKEN_KEY, data.token)
-  return data
+  const body = await res.json()
+  // The backend wraps everything as { success, message, data: { token } } —
+  // the token lives under body.data.token, not body.token.
+  const token = body?.data?.token
+  if (!token) throw new Error('Login succeeded but no session token was returned. Please contact your developer.')
+  sessionStorage.setItem(TOKEN_KEY, token)
+  return body
 }
 
 function readMock(key) {
